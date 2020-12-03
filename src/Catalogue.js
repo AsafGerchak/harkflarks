@@ -26,8 +26,6 @@ class Catalogue extends Component {
       }
     })
       .then((res) => {
-        // console.log(res.data.results);
-
         this.setState({
           movies: res.data.results
         })
