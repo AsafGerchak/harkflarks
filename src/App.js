@@ -1,25 +1,23 @@
-import logo from './logo.svg';
-import './App.css';
+import { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import Catalogue from './Catalogue';
+import MovieDetails from './MovieDetails';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <div>
+          <header>
+            <h1>Hackflix</h1>
+          </header>
+
+          <Route exact path="/" component={Catalogue} />
+          <Route exact path="/movie/:movieID" component={MovieDetails} />
+        </div>
+      </Router>
+    );
+  }
 }
 
 export default App;
