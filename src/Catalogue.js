@@ -11,6 +11,24 @@ class Catalogue extends Component {
   }
 
   componentDidMount() {
+    this.props.yearRandomizer();
+
+    let yearToUse = 1999;
+    if (this.props.match.params.whatYear) {
+      yearToUse = this.props.match.params.whatYear;
+    }
+
+    this.apiCall(yearToUse);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.match.params.whatYear !== this.props.match.params.whatYear) {
+      this.props.yearRandomizer();
+      this.apiCall(this.props.match.params.whatYear);
+    }
+  }
+
+  apiCall = (yearToUse) => {
     axios({
       url: `https://api.themoviedb.org/3/discover/movie`,
       method: `GET`,
@@ -22,7 +40,7 @@ class Catalogue extends Component {
         include_adult: 'false',
         include_video: 'false',
         page: 1,
-        primary_release_year: 1999
+        primary_release_year: yearToUse
       }
     })
       .then((res) => {
